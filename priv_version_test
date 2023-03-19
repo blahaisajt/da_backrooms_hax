@@ -1,5 +1,5 @@
-getgenv().MonsterEsp = true
-getgenv().ItemEsp = true
+_G.MonsterEsp = true
+_G.ItemEsp = true
 
 local ih = Instance.new("Highlight")
 ih.FillColor = Color3.new(0,255,0)
@@ -14,7 +14,7 @@ h.Name = "m_HIGHLIGHT"
 local folder = game.Workspace.Monsters
 
 spawn(function()
-	if getgenv().MonsterEsp == true then
+	if _G.MonsterEsp == true then
 		for _,v in pairs(folder:GetChildren()) do
 			if (not v:FindFirstChild("m_HIGHLIGHT")) then
 				h:Clone().Parent = v
@@ -24,7 +24,7 @@ spawn(function()
 end)
 
 spawn(function()
-	if getgenv().MonsterEsp == false then
+	if _G.MonsterEsp == false then
 		for _,v in pairs(folder:GetDescendants()) do
 			if v:IsA("Highlight") then
 				v:Destroy()
@@ -43,7 +43,7 @@ spawn(function()
 end)
 
 spawn(function()
-	if getgenv().ItemEsp == true and (not game.Workspace.Items:FindFirstChild("i_HIGHLIGHT")) then
+	if _G.ItemEsp == true and (not game.Workspace.Items:FindFirstChild("i_HIGHLIGHT")) then
 		local folder1 = game.Workspace.Items
 		for _,v in pairs(folder1:GetChildren())do
 			ih:Clone().Parent = v
