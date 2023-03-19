@@ -1,0 +1,51 @@
+getgenv().MonsterEsp = true
+getgenv().ItemEsp = true
+
+local ih = Instance.new("Highlight")
+ih.FillColor = Color3.new(0,255,0)
+ih.FillTransparency = 0
+ih.Name = "i_HIGHLIGHT"
+
+local h = Instance.new("Highlight")
+h.FillColor = Color3.new(255,0,0)
+h.FillTransparency = 0
+h.Name = "m_HIGHLIGHT"
+
+local folder = game.Workspace.Monsters
+
+spawn(function()
+	if getgenv().MonsterEsp == true then
+		for _,v in pairs(folder:GetChildren()) do
+			if (not v:FindFirstChild("m_HIGHLIGHT")) then
+				h:Clone().Parent = v
+			end
+		end
+	end
+end)
+
+spawn(function()
+	if getgenv().MonsterEsp == false then
+		for _,v in pairs(folder:GetDescendants()) do
+			if v:IsA("Highlight") then
+				v:Destroy()
+			end
+		end
+	end
+end)
+
+spawn(function()
+	for _,v in pairs(game:GetDescendants()) do
+		if v:IsA("ProximityPrompt") then
+			v.HoldDuration = 0
+			v.MaxActivationDistance = 10
+		end
+	end
+end)
+
+spawn(function()
+	if getgenv().ItemEsp == true and (not game.Workspace.Items:FindFirstChild("i_HIGHLIGHT")) then
+		local folder1 = game.Workspace.Items
+		for _,v in pairs(folder1:GetChildren())do
+			ih:Clone().Parent = v
+		end
+	end)
